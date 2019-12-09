@@ -66,8 +66,9 @@ describe('WindowManager', () => {
           expect([...wm]).to.contain(win)
         })
 
-        it('reports "ready"', () =>
-          expect(ready).to.eventually.be.fulfilled)
+        it('reports "ready"', () => {
+          expect(ready).to.eventually.be.fulfilled
+        })
 
         // Run this test last!
         it('can be closed', async () => {

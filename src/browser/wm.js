@@ -207,46 +207,47 @@ class WindowManager extends EventEmitter {
 
     if (type === 'double-click')
       type = WindowManager.getActionOnDoubleClick()
-
-    switch (type) {
-      case 'close':
-        win.close()
-        break
-      case 'reload':
-        win.reload()
-        break
-      case 'show':
-        win.show()
-        break
-      case 'undo':
-        win.webContents.undo()
-        break
-      case 'redo':
-        win.webContents.redo()
-        break
-      case 'dialog':
-        this.handleShowDialog(win, ...args)
-        break
-      case 'preview':
-        win.previewFile(...args)
-        break
-      case 'maximize':
-        if (win.isMaximized())
-          win.unmaximize()
-        else
-          win.maximize()
-        break
-      case 'minimize':
-        if (win.isMinimized())
-          win.unminimize()
-        else
-          win.minimize()
-        break
-      case 'rsvp':
-        this.handlePendingResponse(...args)
-        break
-      default:
-        win.emit(type, ...args)
+    if (typeof win !== 'undefined') {
+      switch (type) {
+        case 'close':
+          win.close()
+          break
+        case 'reload':
+          win.reload()
+          break
+        case 'show':
+          win.show()
+          break
+        case 'undo':
+          win.webContents.undo()
+          break
+        case 'redo':
+          win.webContents.redo()
+          break
+        case 'dialog':
+          this.handleShowDialog(win, ...args)
+          break
+        case 'preview':
+          win.previewFile(...args)
+          break
+        case 'maximize':
+          if (win.isMaximized())
+            win.unmaximize()
+          else
+            win.maximize()
+          break
+        case 'minimize':
+          if (win.isMinimized())
+            win.unminimize()
+          else
+            win.minimize()
+          break
+        case 'rsvp':
+          this.handlePendingResponse(...args)
+          break
+        default:
+          win.emit(type, ...args)
+      }
     }
   }
 
